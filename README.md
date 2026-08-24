@@ -70,7 +70,3 @@ See `ARCHITECTURE.md` for how this maps onto the full long-term system, `PROJECT
 - No automated "illegal activity" determinations — outputs use `mining-risk`, `mining_disturbance_candidate`, `REQUIRES_HUMAN_VERIFICATION`, never "illegal" or "confirmed crime".
 - Every prediction carries evidence + confidence, never a bare assertion.
 - No fabricated satellite observations, licenses, or geological data. Where real data isn't wired in, it's synthetic and labeled as such — never silently substituted.
-
-## License
-
-Not yet specified — add one before any external contribution or deployment.
