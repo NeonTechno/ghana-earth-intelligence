@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Literal, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
+
+
+def _utc_now() -> datetime:
+    return datetime.now(timezone.utc)
 
 
 class Location(BaseModel):
@@ -20,6 +24,8 @@ class EvidenceItem(BaseModel):
 
 
 class Alert(BaseModel):
+    model_config = ConfigDict(protected_namespaces=())
+
     id: str
     location: Location
     disturbance_class: str
@@ -31,7 +37,8 @@ class Alert(BaseModel):
     status: str = "REQUIRES_HUMAN_VERIFICATION"
     data_source: Literal["synthetic", "sentinel-2", "sentinel-1", "landsat"] = "synthetic"
     model_version: str = "gei-mvp-0.1.0"
-    generated_at: datetime = Field(default_factory=datetime.utcnow)
+    persisted: bool = False
+    generated_at: datetime = Field(default_factory=_utc_now)
 
 
 class VerificationRecord(BaseModel):
@@ -39,4 +46,4 @@ class VerificationRecord(BaseModel):
     verdict: Literal["confirmed", "false_positive", "requires_investigation", "insufficient_evidence"]
     notes: Optional[str] = None
     verified_by: str
-    verified_at: datetime = Field(default_factory=datetime.utcnow)
+    verified_at: datetime = Field(default_factory=_utc_now)

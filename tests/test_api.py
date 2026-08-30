@@ -8,7 +8,9 @@ client = TestClient(app)
 def test_health():
     resp = client.get("/api/health")
     assert resp.status_code == 200
-    assert resp.json()["status"] == "ok"
+    body = resp.json()
+    assert body["status"] == "ok"
+    assert "database_configured" in body
 
 
 def test_list_locations():
@@ -26,6 +28,7 @@ def test_list_alerts_returns_risk_scores():
         assert 0 <= a["risk_score"] <= 100
         assert a["data_source"] == "synthetic"
         assert a["status"] == "REQUIRES_HUMAN_VERIFICATION"
+        assert "persisted" in a
 
 
 def test_get_risk_custom_location():
@@ -44,6 +47,10 @@ def test_verification_flow():
     )
     assert resp.status_code == 200
     assert resp.json()["verdict"] == "requires_investigation"
+
+    history = client.get(f"/api/verification/{alert_id}")
+    assert history.status_code == 200
+    assert len(history.json()) >= 1
 
 
 def test_unknown_alert_404():
