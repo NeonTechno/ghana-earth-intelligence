@@ -80,6 +80,3 @@ Supabase project `ghana-earth-intelligence` (org `DeRi`, `eu-west-1`, free tier)
 - Every prediction carries evidence + confidence, never a bare assertion.
 - No fabricated satellite observations, licenses, or geological data. Where real data isn't wired in, it's synthetic and labeled as such -- never silently substituted.
 
-## License
-
-Not yet specified -- add one before any external contribution or deployment.
