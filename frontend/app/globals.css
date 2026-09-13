@@ -1,0 +1,351 @@
+:root {
+  --gei-bg: #0f1115;
+  --gei-panel-bg: #161a21;
+  --gei-border: #2a2f3a;
+  --gei-text: #e6e8eb;
+  --gei-text-dim: #9aa2af;
+  --gei-accent: #4fa8ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--gei-bg);
+  color: var(--gei-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.gei-app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.gei-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--gei-border);
+  background: var(--gei-panel-bg);
+}
+
+.gei-topbar h1 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.gei-tagline {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--gei-text-dim);
+}
+
+.gei-refresh {
+  background: var(--gei-accent);
+  color: #06121f;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.gei-refresh:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.gei-disclaimer-banner {
+  font-size: 12px;
+  color: var(--gei-text-dim);
+  padding: 8px 20px;
+  border-bottom: 1px solid var(--gei-border);
+  background: #1a1305;
+}
+
+.gei-error-banner {
+  font-size: 13px;
+  color: #ffdede;
+  background: #4a1414;
+  padding: 8px 20px;
+  border-bottom: 1px solid var(--gei-border);
+}
+
+.gei-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 260px 1fr 340px;
+  min-height: 0;
+}
+
+.gei-alert-list {
+  border-right: 1px solid var(--gei-border);
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.gei-alert-list h2 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gei-text-dim);
+  margin: 0 0 8px;
+}
+
+.gei-alert-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gei-alert-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--gei-text);
+  padding: 8px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 13px;
+}
+
+.gei-alert-item:hover {
+  background: #1e222b;
+}
+
+.gei-alert-item--active {
+  border-color: var(--gei-accent);
+  background: #16233a;
+}
+
+.gei-alert-item__name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gei-alert-item__score {
+  font-variant-numeric: tabular-nums;
+  color: var(--gei-text-dim);
+}
+
+.gei-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.gei-dot--low { background: #2e7d32; }
+.gei-dot--moderate { background: #f9a825; }
+.gei-dot--elevated { background: #ef6c00; }
+.gei-dot--high { background: #d84315; }
+.gei-dot--critical { background: #b71c1c; }
+
+.gei-map-wrap {
+  position: relative;
+  min-width: 0;
+}
+
+.gei-map {
+  position: absolute;
+  inset: 0;
+}
+
+.gei-marker {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  cursor: pointer;
+  padding: 0;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.4);
+}
+
+.gei-marker--selected {
+  outline: 3px solid var(--gei-accent);
+  outline-offset: 2px;
+}
+
+.gei-panel {
+  border-left: 1px solid var(--gei-border);
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.gei-panel--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gei-text-dim);
+  font-size: 13px;
+  padding: 24px;
+}
+
+.gei-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.gei-panel__header h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.gei-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.gei-badge--low { background: #2e7d32; }
+.gei-badge--moderate { background: #f9a825; color: #241a00; }
+.gei-badge--elevated { background: #ef6c00; }
+.gei-badge--high { background: #d84315; }
+.gei-badge--critical { background: #b71c1c; }
+
+.gei-facts {
+  margin: 16px 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  font-size: 13px;
+}
+
+.gei-facts dt {
+  color: var(--gei-text-dim);
+}
+
+.gei-facts dd {
+  margin: 0;
+}
+
+.gei-tag {
+  background: #22303f;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+.gei-disclaimer {
+  color: var(--gei-text-dim);
+  font-size: 11px;
+}
+
+.gei-status {
+  font-weight: 600;
+  color: var(--gei-accent);
+}
+
+.gei-evidence {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gei-evidence li {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.gei-evidence__signal {
+  color: var(--gei-text-dim);
+  text-transform: capitalize;
+}
+
+.gei-evidence__bar {
+  height: 6px;
+  background: #22262f;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.gei-evidence__bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--gei-accent);
+}
+
+.gei-evidence__points {
+  font-variant-numeric: tabular-nums;
+  color: var(--gei-text-dim);
+}
+
+.gei-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.gei-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--gei-text-dim);
+}
+
+.gei-form input,
+.gei-form select,
+.gei-form textarea {
+  background: #0f1319;
+  border: 1px solid var(--gei-border);
+  border-radius: 6px;
+  color: var(--gei-text);
+  padding: 6px 8px;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.gei-form button {
+  background: var(--gei-accent);
+  color: #06121f;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.gei-form button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.gei-error {
+  color: #ff8a8a;
+  font-size: 12px;
+  margin: 0;
+}
+
+.gei-success {
+  color: #8ee08e;
+  font-size: 13px;
+}
