@@ -20,12 +20,14 @@ WEIGHTS: Dict[str, float] = {
     "geospatial_context": 0.10,
 }
 
+# Upper bounds are inclusive and work for fractional scores as well as
+# integers. Integer-only ranges (e.g. 21-40) leave gaps for scores like 20.5.
 BUCKETS = [
-    (0, 20, "LOW"),
-    (21, 40, "MODERATE"),
-    (41, 60, "ELEVATED"),
-    (61, 80, "HIGH"),
-    (81, 100, "CRITICAL"),
+    (20, "LOW"),
+    (40, "MODERATE"),
+    (60, "ELEVATED"),
+    (80, "HIGH"),
+    (100, "CRITICAL"),
 ]
 
 
@@ -38,10 +40,11 @@ class RiskAssessment:
 
 
 def score_bucket(score: float) -> str:
-    for lo, hi, name in BUCKETS:
-        if lo <= score <= hi:
+    """Map any bounded 0-100 score to a bucket without fractional gaps."""
+    for upper_bound, name in BUCKETS:
+        if score <= upper_bound:
             return name
-    return "CRITICAL" if score > 100 else "LOW"
+    return "CRITICAL"
 
 
 def compute_risk(evidence: Dict[str, float]) -> RiskAssessment:

@@ -4,9 +4,15 @@ from app.risk_engine import compute_risk, score_bucket
 def test_score_bucket_boundaries():
     assert score_bucket(0) == "LOW"
     assert score_bucket(20) == "LOW"
+    assert score_bucket(20.5) == "MODERATE"
     assert score_bucket(21) == "MODERATE"
+    assert score_bucket(40) == "MODERATE"
+    assert score_bucket(40.5) == "ELEVATED"
     assert score_bucket(60) == "ELEVATED"
+    assert score_bucket(60.5) == "HIGH"
     assert score_bucket(61) == "HIGH"
+    assert score_bucket(80) == "HIGH"
+    assert score_bucket(80.5) == "CRITICAL"
     assert score_bucket(100) == "CRITICAL"
 
 
